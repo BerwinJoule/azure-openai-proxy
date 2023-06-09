@@ -7,6 +7,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"fmt"
+	"time"
 )
 
 var (
@@ -111,7 +113,7 @@ func handleAzureProxy(c *gin.Context) {
 
 	endTime := time.Now() // 记录结束时间
 	elapsedTime := endTime.Sub(startTime) // 计算时间差
-	fmt.Printf("中转代理的耗时为：%v\n", elapsedTime) // 打印结果到控制台
+	log.Printf("中转代理的耗时为：%v\n", elapsedTime) // 打印结果到控制台
 }
 
 func handleOpenAIProxy(c *gin.Context) {
