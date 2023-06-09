@@ -88,6 +88,7 @@ func handleOptions(c *gin.Context) {
 }
 
 func handleAzureProxy(c *gin.Context) {
+	startTime := time.Now() // 记录开始时间
 	// BUGFIX: fix options request, see https://github.com/diemus/azure-openai-proxy/issues/1
 	if c.Request.Method == http.MethodOptions {
 		c.Header("Access-Control-Allow-Origin", "*")
@@ -107,6 +108,10 @@ func handleAzureProxy(c *gin.Context) {
 			log.Printf("rewrite azure response error: %v", err)
 		}
 	}
+
+	endTime := time.Now() // 记录结束时间
+	elapsedTime := endTime.Sub(startTime) // 计算时间差
+	fmt.Printf("中转代理的耗时为：%v\n", elapsedTime) // 打印结果到控制台
 }
 
 func handleOpenAIProxy(c *gin.Context) {
